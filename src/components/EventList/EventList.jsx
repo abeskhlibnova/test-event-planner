@@ -1,8 +1,10 @@
 import React, { useState } from "react";
 import { CategoryBtn } from "./EventList.styled";
 import { FiFilter } from "react-icons/fi";
+import photo from "../../images/photo.jpg";
+import { EventItem } from "./EventList.styled";
 
-const HolidayDropdown = () => {
+export default function EventList() {
   const [selectedSort, setSelectedSort] = useState("");
   const [selectedCategory, setSelectedCategory] = useState(""); // Состояние для выбранной категории
 
@@ -65,13 +67,33 @@ const HolidayDropdown = () => {
 
       <h3>My events</h3>
 
-      <ul>
+      {/* <ul>
         {sortEvents.map((holiday, index) => (
           <li key={index}>{holiday.name}</li>
         ))}
+      </ul> */}
+
+      <ul>
+        <EventItem>
+          <img src={photo} width="146" height="" />
+          {/* ниже список категорий события которые долны приходить с бека */}
+          <ul>
+            <li>
+              <p>art</p>
+            </li>
+            <li>
+              <p>music</p>
+            </li>
+          </ul>
+          {/* конец списка категорий события */}
+          <p>data time location</p>
+          <h4>Title event</h4>
+          <p>descripton</p>
+          {/* Кнопка появляется при наведении на событие */}
+          <button>More info</button>
+          {/* Конец кнопки */}
+        </EventItem>
       </ul>
     </div>
   );
-};
-
-export default HolidayDropdown;
+}

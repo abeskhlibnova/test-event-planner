@@ -4,7 +4,7 @@ import Option from "@mui/joy/Option";
 import KeyboardArrowDown from "@mui/icons-material/KeyboardArrowDown";
 
 export const HeaderWrapper = styled.header`
-  padding: 24px;
+  /* padding: 24px; */
 `;
 
 // export const SelectLang = styled(Select)``;

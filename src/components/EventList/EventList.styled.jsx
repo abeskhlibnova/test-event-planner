@@ -12,3 +12,13 @@ export const CategoryBtn = styled.select`
   background-size: cover;
   /* color: red; */
 `;
+
+export const EventItem = styled.li`
+  width: 146px;
+  border-radius: 12px;
+  background-color: #ffffff;
+  /* background: url(<path-to-image>), lightgray 50% / cover no-repeat; */
+
+  /* sdw2 */
+  box-shadow: 2px 4px 9px 0px rgba(166, 141, 174, 0.28);
+`;
