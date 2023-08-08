@@ -4,14 +4,16 @@ import { storage, db } from "../../../firebase/config";
 import { collection, addDoc } from "firebase/firestore";
 
 export default function CreateEvent() {
+  const [selectedImage, setSelectedImage] = useState(null);
   const [formData, setFormData] = useState({
     title: "",
     description: "",
     data: "",
     time: "",
-    location: "",
+    locations: "",
     category: "No category",
     priority: "None",
+    createAt: "",
   });
   // const history = useHistory();
   const navigate = useNavigate();
@@ -28,26 +30,36 @@ export default function CreateEvent() {
   };
 
   const load = async () => {
+    const dateCreatePOst = new Date();
+    const dateCreate = dateCreatePOst.toLocaleString();
+
     const createEvent = await addDoc(collection(db, "events"), {
       title: formData.title,
       description: formData.description,
       data: formData.data,
       time: formData.time,
-      location: formData.location,
+      locations: formData.locations,
       category: formData.category,
       priority: formData.priority,
+      createAt: dateCreate,
     });
+  };
+
+  const handleImageChange = (event) => {
+    const file = event.target.files[0];
+    setSelectedImage(file);
   };
 
   const handleSubmit = (event) => {
     event.preventDefault();
     load();
+
     setFormData({
       title: "",
       description: "",
       data: "",
       time: "",
-      location: "",
+      locations: "",
       category: "No category",
       priority: "high",
     });
@@ -102,12 +114,12 @@ export default function CreateEvent() {
           />
         </div>
         <div>
-          <label htmlFor="location">Location:</label>
+          <label htmlFor="locations">Location:</label>
           <input
             type="text"
-            id="location"
-            name="location"
-            value={formData.location}
+            id="locations"
+            name="locations"
+            value={formData.locations}
             onChange={handleChange}
           />
         </div>
@@ -128,6 +140,9 @@ export default function CreateEvent() {
             <option value="Party">Party</option>
             <option value="Sport">Sport</option>
           </select>
+        </div>
+        <div>
+          <input type="file" />
         </div>
         <div>
           <label htmlFor="priority">Priority:</label>

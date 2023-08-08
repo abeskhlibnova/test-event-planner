@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { storage, db } from "../../../firebase/config";
 
-import { getDocs, collection, doc, onSnapshot } from "firebase/firestore";
+import { getDocs, collection, orderBy, query } from "firebase/firestore";
 
 // import { CategoryBtn } from "./EventList.styled";
 import { FiFilter } from "react-icons/fi";
@@ -12,45 +12,145 @@ import { EventItem } from "./MainPage.styled";
 export default function MainPage() {
   const [events, setEvents] = useState([]);
   const [selectedSort, setSelectedSort] = useState("");
-  const [selectedCategory, setSelectedCategory] = useState(""); // Состояние для выбранной категории
+  const [selectedCategory, setSelectedCategory] = useState("");
+  const [filteredEvents, setFilteredEvents] = useState([]);
 
   const location = useLocation();
 
   useEffect(() => {
     getAllEvents();
+    // handleSelectedCategory({ target: { value: selectedCategory } });
+    // handleSelectedCategory();
   }, []);
 
   const getAllEvents = async () => {
-    onSnapshot(collection(db, "events"), (snapshot) => {
-      setEvents(snapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
-      // console.log("posts", posts);
-    });
+    try {
+      const eventsRef = collection(db, "events");
+      const q = query(eventsRef, orderBy("data", "desc"));
+
+      const querySnapshot = await getDocs(q);
+      const eventsData = querySnapshot.docs.map((doc) => ({
+        ...doc.data(),
+        id: doc.id,
+      }));
+      setEvents(eventsData);
+
+      // handleSelectedCategory({ target: { value: selectedCategory } });
+    } catch (error) {
+      console.error("Error fetching events:", error);
+    }
   };
 
-  const handleCategoryChange = (event) => {
-    setSelectedSort(event.target.value); // Обработчик выбора категории
+  const handleSelectSort = (e) => {
+    setSelectedSort(e.target.value);
+    switch (e.target.value) {
+      case "by name up":
+        setEvents((prevEvents) => {
+          return [...prevEvents].sort((a, b) => a.title.localeCompare(b.title));
+        });
+        break;
+      case "by name down":
+        setEvents((prevEvents) => {
+          return [...prevEvents].sort((a, b) => b.title.localeCompare(a.title));
+        });
+        break;
+      case "by data up":
+        setEvents((prevEvents) => {
+          return [...prevEvents].sort((a, b) => a.data < b.data);
+        });
+        break;
+      case "by data down":
+        setEvents((prevEvents) => {
+          return [...prevEvents].sort((a, b) => b.data < a.data);
+        });
+        break;
+      case "by priority up":
+        setEvents((prevEvents) => {
+          return [...prevEvents].sort((a, b) => {
+            const priorityOrder = { high: 1, medium: 2, low: 3 };
+            return priorityOrder[a.priority] - priorityOrder[b.priority];
+          });
+        });
+        break;
+      case "by priority down":
+        setEvents((prevEvents) => {
+          return [...prevEvents].sort((a, b) => {
+            const priorityOrder = { low: 1, medium: 2, high: 3 };
+            return priorityOrder[a.priority] - priorityOrder[b.priority];
+          });
+        });
+        break;
+      default:
+        console.log("no sort");
+    }
   };
 
-  // Массив с праздниками и их категориями (здесь можно использовать данные из API или статически задать)
-  const holidays = [
-    { name: "by name ↑", sort: "by name " },
-    { name: "Свадьба", sort: "День свадьбы" },
-    { name: "Корпоратив", sort: "Корпоратив" },
-    // Другие праздники и категории
-  ];
+  // const handleSelectedCategory = async (e) => {
+  //   const selectedValue = e.target.value;
+  //   setSelectedCategory(selectedValue);
 
-  // Фильтрация праздников по выбранной категории
-  const sortEvents = selectedSort
-    ? holidays.filter((holiday) => holiday.sort === selectedSort)
-    : holidays;
-  ////////
+  //   if (selectedValue === "All") {
+  //     setFilteredEvents(events); // Если выбрана пустая категория, показываем все события
+  //   } else {
+  //     const filtered = events.filter(
+  //       (event) => event.category === selectedValue
+  //     );
+  //     setFilteredEvents(filtered);
+  //   }
+  // };
 
-  const filteredHolidays = selectedCategory
-    ? holidays.filter((holiday) => holiday.category === selectedCategory)
-    : holidays;
+  const handleSelectedCategory = (e) => {
+    setSelectedCategory(e.target.value);
+    // console.log("Selected category:", e.target.value);
+    // const selectedValue = e.target.value;
+    // setSelectedCategory(selectedValue);
+
+    // if (selectedValue === "") {
+    //   setFilteredEvents(events); // Показываем все события, если выбрана пустая категория
+    // } else if (selectedValue === "All") {
+    //   setFilteredEvents(events); // Показываем все события при выборе "All"
+    // } else {
+    //   const filtered = events.filter(
+    //     (event) => event.category === selectedValue
+    //   );
+    //   setFilteredEvents(filtered);
+    // }
+  };
+
+  // const elements = filteredEvents.map(
+  //   ({ id, title, description, data, time, locations, category, priority }) => {
+  //     return (
+  //       <EventItem key={id}>
+  //         <img src={photo} width="146" height="" />
+  //         {/* ниже список категорий события которые долны приходить с бека */}
+  //         <ul>
+  //           <li>
+  //             <p>{category}</p>
+  //           </li>
+  //           <li>
+  //             <p>{priority}</p>
+  //           </li>
+  //         </ul>
+  //         {/* конец списка категорий события */}
+  //         <p>
+  //           {data} at {time} {locations}
+  //         </p>
+  //         <h4>{title}</h4>
+  //         <p>{description}</p>
+  //         {/* Кнопка появляется при наведении на событие */}
+  //         <button>
+  //           <Link to={`/event/${id}`} state={{ from: location }}>
+  //             More info
+  //           </Link>
+  //         </button>
+  //         {/* Конец кнопки */}
+  //       </EventItem>
+  //     );
+  //   }
+  // );
 
   const elements = events.map(
-    ({ id, title, description, data, time, location, category, priority }) => {
+    ({ id, title, description, data, time, locations, category, priority }) => {
       return (
         <EventItem key={id}>
           <img src={photo} width="146" height="" />
@@ -65,7 +165,7 @@ export default function MainPage() {
           </ul>
           {/* конец списка категорий события */}
           <p>
-            {data} at {time} {location}
+            {data} at {time} {locations}
           </p>
           <h4>{title}</h4>
           <p>{description}</p>
@@ -84,7 +184,7 @@ export default function MainPage() {
   return (
     <div>
       <label htmlFor="sort"></label>
-      <select id="sort" value={selectedSort} onChange={handleCategoryChange}>
+      <select id="sort" value={selectedSort} onChange={handleSelectSort}>
         <option value="">Sort by</option>
         <option value="by name up">by name &uarr;</option>
         <option value="by name down">by name &darr;</option>
@@ -92,17 +192,16 @@ export default function MainPage() {
         <option value="by data down">by data &darr;</option>
         <option value="by priority up">by priority &uarr;</option>
         <option value="by priority down">by priority &darr;</option>
-
-        {/* Добавьте другие категории */}
       </select>
 
       <label htmlFor="category"></label>
       <select
         id="category"
         value={selectedCategory}
-        onChange={handleCategoryChange}
+        onChange={handleSelectedCategory}
       >
         <option value="">Category</option>
+        {/* <option value="All">All</option> */}
         <option value="Art">Art</option>
         <option value="Music">Music</option>
         <option value="Business">Business</option>
@@ -110,8 +209,6 @@ export default function MainPage() {
         <option value="Workshop">Workshop</option>
         <option value="Party">Party</option>
         <option value="Sport">Sport</option>
-
-        {/* Добавьте другие категории */}
       </select>
 
       <button>
@@ -119,40 +216,7 @@ export default function MainPage() {
       </button>
 
       <h3>My events</h3>
-
-      {/* <ul>
-        {sortEvents.map((holiday, index) => (
-          <li key={index}>{holiday.name}</li>
-        ))}
-      </ul> */}
-
-      <ul key={events.id}>{elements}</ul>
+      <ul>{elements}</ul>
     </div>
   );
 }
-
-// <ul>
-//   <EventItem>
-//     <img src={photo} width="146" height="" />
-//     {/* ниже список категорий события которые долны приходить с бека */}
-//     <ul>
-//       <li>
-//         <p>art</p>
-//       </li>
-//       <li>
-//         <p>music</p>
-//       </li>
-//     </ul>
-//     {/* конец списка категорий события */}
-//     <p>data time location</p>
-//     <h4>Title event</h4>
-//     <p>descripton</p>
-//     {/* Кнопка появляется при наведении на событие */}
-//     <button>
-//       <Link to={`/event`} state={{ from: location }}>
-//         More info
-//       </Link>
-//     </button>
-//     {/* Конец кнопки */}
-//   </EventItem>
-// </ul>;

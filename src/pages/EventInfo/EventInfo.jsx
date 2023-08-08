@@ -13,10 +13,7 @@ import photo from "../../images/photo.jpg";
 
 export default function EventInfo() {
   const [eventInfo, setEventInfo] = useState("");
-  const [deleteStatus, setDeleteStatus] = useState("idle");
   const { eventId } = useParams();
-  //   const history = useHistory();
-  const navigate = useNavigate();
 
   const location = useLocation();
   const goBack = location.state?.from ?? "/";
@@ -25,26 +22,38 @@ export default function EventInfo() {
     getEventInfo();
   }, []);
 
+  //
   const getEventInfo = async () => {
-    onSnapshot(doc(db, "events", eventId), (doc) => {
+    const unsubscribe = onSnapshot(doc(db, "events", eventId), (doc) => {
       setEventInfo(doc.data());
     });
+
+    return () => unsubscribe(); // Отписываемся при размонтировании компонента
   };
 
   const deleteEvent = async () => {
-    await deleteDoc(doc(db, "events", eventId));
-    navigate("/");
-    setEventInfo("");
-    // try {
-    //   setDeleteStatus("loading");
-    //   await deleteDoc(doc(db, "events", eventId));
-    //   setDeleteStatus("success");
-    //   navigate("/");
-    // } catch (error) {
-    //   console.error("Error deleting event:", error);
-    //   setDeleteStatus("error");
-    // }
+    if (window.confirm("Are you sure you want to delete this event?")) {
+      await deleteDoc(doc(db, "events", eventId));
+      navigate(goBack);
+    }
   };
+
+  const navigate = useNavigate();
+
+  if (!eventInfo) {
+    return <div>Loading event info...</div>;
+  }
+
+  //
+  // const getEventInfo = async () => {
+  //   onSnapshot(doc(db, "events", eventId), (doc) => {
+  //     setEventInfo(doc.data());
+  //   });
+  // };
+
+  // const deleteEvent = async () => {
+  //   await deleteDoc(doc(db, "events", eventId));
+  // };
   return (
     <div>
       <button>
@@ -55,7 +64,7 @@ export default function EventInfo() {
         <ul>
           <li>{eventInfo.category}</li>
           <li>{eventInfo.priority}</li>
-          <li>{eventInfo.location}</li>
+          <li>{eventInfo.locations}</li>
           <li>
             {eventInfo.data} at {eventInfo.time}
           </li>
@@ -65,9 +74,9 @@ export default function EventInfo() {
             <button>Edit</button>
           </li>
           <li>
-            <button onClick={deleteEvent} disabled={deleteStatus === "loading"}>
+            <button onClick={deleteEvent}>
+              {/* <Link to={goBack}>Delete event</Link> */}
               Delete event
-              {/* {deleteStatus === "loading" ? "Deleting..." : "Delete event"} */}
             </button>
           </li>
         </ul>
