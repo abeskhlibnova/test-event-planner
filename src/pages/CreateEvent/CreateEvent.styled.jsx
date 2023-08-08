@@ -33,27 +33,52 @@ export const FormWrapper = styled.div`
   background-color: #ffffff;
   border-radius: 8px;
   box-shadow: 2px 4px 9px 0px rgba(166, 141, 174, 0.28);
+  @media screen and (min-width: 768px) {
+    position: relative;
+
+    width: 688px;
+    height: 656px;
+  }
+  @media screen and (min-width: 1280px) {
+    width: 1280px;
+    height: 490px;
+  }
 `;
 
 export const Form = styled.form`
   @media screen and (min-width: 768px) {
     width: 688px;
-    height: 656px;
-    display: grid;
-
-    grid-template-rows: repeat(2, 1fr);
-    grid-template-columns: 200px 300px;
-    grid-auto-flow: column;
-    justify-content: center;
-    align-items: center;
+    height: 600px;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    gap: 20px 42px;
+    /* grid-template-columns: repeat(2, 1fr);
+    grid-gap: 10px;
+    align-content: start; */
+    /* display: grid; */
+    /* grid-template-columns: repeat(2, 1fr); */
+    /* grid-template-rows: repeat(2, 1fr);  */
+    /* grid-gap: 10px; */
 
     /* gap: 20px; */
+  }
+  @media screen and (min-width: 1280px) {
+    width: 1280px;
+    height: 400px;
   }
 `;
 
 export const InputWrapper = styled.div`
   display: flex;
   flex-direction: column;
+  @media screen and (min-width: 768px) {
+    width: 308px;
+    margin-bottom: 8px;
+  }
+  @media screen and (min-width: 1280px) {
+    width: 348px;
+  }
 `;
 
 export const Label = styled.label`
@@ -76,7 +101,7 @@ export const Input = styled.input`
     outline: none;
   }
   @media screen and (min-width: 768px) {
-    width: 308px;
+    /* width: 308px; */
     margin-bottom: 8px;
   }
 `;
@@ -129,4 +154,14 @@ export const SubmitBtn = styled.button`
   color: #ffffff;
   border-radius: 8px;
   box-shadow: 2px 4px 9px 0px rgba(166, 141, 174, 0.28);
+  @media screen and (min-width: 768px) {
+    position: absolute;
+    bottom: 40px;
+    right: 24px;
+    width: 192px;
+  }
+  @media screen and (min-width: 1280px) {
+    bottom: 54px;
+    right: 40px;
+  }
 `;
