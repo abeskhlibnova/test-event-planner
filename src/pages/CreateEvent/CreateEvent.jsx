@@ -2,8 +2,6 @@ import React, { useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { storage, db } from "../../../firebase/config";
 import { collection, addDoc } from "firebase/firestore";
-// import Select, { selectClasses } from "@mui/joy/Select";
-// import Option from "@mui/joy/Option";
 
 import {
   CreateEventWrapper,
@@ -100,7 +98,6 @@ export default function CreateEvent() {
               name="title"
               value={formData.title}
               onChange={handleChange}
-              // pattern="/^([A-Za-zА-Яа-яІіЇїЄєҐґ-\s]{2,16})+$/"
             />
           </InputWrapper>
           <InputWrapper>

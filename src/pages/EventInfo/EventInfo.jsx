@@ -1,15 +1,29 @@
 import React, { useState, useEffect } from "react";
-import { Link, useLocation, useParams, useNavigate } from "react-router-dom";
-import { storage, db } from "../../../firebase/config";
+import { useLocation, useParams, useNavigate } from "react-router-dom";
+import { db } from "../../../firebase/config";
 
+import { doc, onSnapshot, deleteDoc } from "firebase/firestore";
 import {
-  getDocs,
-  collection,
-  doc,
-  onSnapshot,
-  deleteDoc,
-} from "firebase/firestore";
-import photo from "../../images/photo.jpg";
+  BackBtn,
+  BackLink,
+  TitleEvent,
+  InfoWrapper,
+  Img,
+  TextWrapper,
+  InfoEventWrapper,
+  Description,
+  EventData,
+  EventDataItem,
+  TextData,
+  BtnList,
+  BtnItem,
+  BtnEdit,
+  BtnDelete,
+  PriorityHighText,
+  PriorityMediumText,
+  PriorityLowText,
+} from "./EventInfo.styled";
+import photo from "../../images/defaultPhoto.png";
 
 export default function EventInfo() {
   const [eventInfo, setEventInfo] = useState("");
@@ -28,7 +42,7 @@ export default function EventInfo() {
       setEventInfo(doc.data());
     });
 
-    return () => unsubscribe(); // Отписываемся при размонтировании компонента
+    return () => unsubscribe();
   };
 
   const deleteEvent = async () => {
@@ -44,43 +58,52 @@ export default function EventInfo() {
     return <div>Loading event info...</div>;
   }
 
-  //
-  // const getEventInfo = async () => {
-  //   onSnapshot(doc(db, "events", eventId), (doc) => {
-  //     setEventInfo(doc.data());
-  //   });
-  // };
-
-  // const deleteEvent = async () => {
-  //   await deleteDoc(doc(db, "events", eventId));
-  // };
   return (
-    <div>
-      <button>
-        <Link to={goBack}>&larr; Back</Link>
-      </button>
-      <div>
-        <img src={photo} width="146" height="" />
-        <ul>
-          <li>{eventInfo.category}</li>
-          <li>{eventInfo.priority}</li>
-          <li>{eventInfo.locations}</li>
-          <li>
-            {eventInfo.data} at {eventInfo.time}
-          </li>
-        </ul>
-        <ul>
-          <li>
-            <button>Edit</button>
-          </li>
-          <li>
-            <button onClick={deleteEvent}>
-              {/* <Link to={goBack}>Delete event</Link> */}
-              Delete event
-            </button>
-          </li>
-        </ul>
-      </div>
-    </div>
+    <InfoEventWrapper>
+      <BackBtn>
+        <BackLink to={goBack}>&larr; &nbsp; Back</BackLink>
+      </BackBtn>
+      <TitleEvent>{eventInfo.title}</TitleEvent>
+      <InfoWrapper>
+        <Img src={photo} />
+        <TextWrapper>
+          <Description>{eventInfo.description}</Description>
+          <EventData>
+            <EventDataItem>
+              <TextData>{eventInfo.category}</TextData>
+            </EventDataItem>
+            <EventDataItem>
+              {(eventInfo.priority === "High" && (
+                <PriorityHighText>{eventInfo.priority}</PriorityHighText>
+              )) ||
+                (eventInfo.priority === "Low" && (
+                  <PriorityLowText>{eventInfo.priority}</PriorityLowText>
+                )) ||
+                (eventInfo.priority === "Medium" && (
+                  <PriorityMediumText>{eventInfo.priority}</PriorityMediumText>
+                ))}
+            </EventDataItem>
+            <EventDataItem>
+              <TextData>{eventInfo.locations}</TextData>
+            </EventDataItem>
+            <EventDataItem>
+              <TextData>
+                {eventInfo.data.split("-").slice(1).reverse().join(".")} at
+                &nbsp;
+                {eventInfo.time}
+              </TextData>
+            </EventDataItem>
+          </EventData>
+          <BtnList>
+            <BtnItem>
+              <BtnEdit>Edit</BtnEdit>
+            </BtnItem>
+            <BtnItem>
+              <BtnDelete onClick={deleteEvent}>Delete event</BtnDelete>
+            </BtnItem>
+          </BtnList>
+        </TextWrapper>
+      </InfoWrapper>
+    </InfoEventWrapper>
   );
 }

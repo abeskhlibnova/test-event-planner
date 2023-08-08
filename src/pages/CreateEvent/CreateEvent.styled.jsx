@@ -26,6 +26,10 @@ export const BackLink = styled(Link)`
 
 export const TitleInput = styled.h3`
   margin-bottom: 24px;
+  @media screen and (min-width: 768px) {
+    font-size: 32px;
+    font-weight: 600;
+  }
 `;
 export const FormWrapper = styled.div`
   justify-content: center;
