@@ -1,15 +1,20 @@
 import styled from "styled-components";
-import Select, { selectClasses } from "@mui/joy/Select";
-import Option from "@mui/joy/Option";
-import KeyboardArrowDown from "@mui/icons-material/KeyboardArrowDown";
 
 export const HeaderWrapper = styled.header`
-  /* padding: 24px; */
+  border-bottom: 1px solid #7b61ff;
+  background-color: #ffffff;
+  padding: 24px;
 `;
 
-// export const SelectLang = styled(Select)``;
+export const WrapperSearchLang = styled.div`
+  display: flex;
+  flex-direction: row-reverse;
+  flex-wrap: wrap;
+`;
 
 export const Title = styled.h2`
-  font-size: 24px;
   color: #7b61ff;
+  font-family: Alata;
+  font-size: 24px;
+  font-weight: 400;
 `;

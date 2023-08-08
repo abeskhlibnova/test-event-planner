@@ -153,9 +153,9 @@ export default function CreateEvent() {
             onChange={handleChange}
           >
             <option value=""></option>
-            <option value="high">high</option>
-            <option value="medium">medium</option>
-            <option value="low">low</option>
+            <option value="High">high</option>
+            <option value="Medium">medium</option>
+            <option value="Low">low</option>
           </select>
         </div>
         <div>

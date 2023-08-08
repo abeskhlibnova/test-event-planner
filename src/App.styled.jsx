@@ -14,5 +14,5 @@ export const AppBox = styled.div`
 
   background-image: url(${background});
   background-size: 100% 100%;
-  padding: 24px;
+  /* padding: 24px; */
 `;

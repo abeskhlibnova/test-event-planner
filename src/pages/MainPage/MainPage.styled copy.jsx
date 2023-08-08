@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import { Link } from "react-router-dom";
 import Select, { selectClasses } from "@mui/joy/Select";
 import Option from "@mui/joy/Option";
 import KeyboardArrowDown from "@mui/icons-material/KeyboardArrowDown";
@@ -8,13 +7,17 @@ import sortEvent from "../../images/icons/sort.svg";
 
 export const MainPageWrapper = styled.div`
   padding: 24px;
-  margin: auto 10px;
-  @media screen and (min-width: 1280px) {
-    padding: 60px 80px;
-  }
 `;
+// export const SortBtn = styled.span`
+//   visibility: hidden;
+//   @media screen and (min-width: 768px) {
+//     visibility: visible;
+//   }
+// `;
 
 export const DropdownContent = styled.div`
+  /* display: none; */
+  /* position: absolute; */
   background-color: #f9f9f9;
   border: 1px solid #ddd;
   padding: 10px;
@@ -27,6 +30,7 @@ export const SortBtn = styled.button`
   border-radius: 8px;
   background-image: url(${sortEvent});
   background-color: #ffffff;
+  /* sdw2 */
   box-shadow: 2px 4px 9px 0px rgba(166, 141, 174, 0.28);
   background-size: 24px 24px;
   background-repeat: no-repeat;
@@ -35,6 +39,7 @@ export const SortBtn = styled.button`
   &::-ms-expand {
     display: none;
   }
+  /* color: red; */
 `;
 
 export const CategoryBtn = styled.select`
@@ -48,6 +53,8 @@ export const CategoryBtn = styled.select`
   background-repeat: no-repeat;
   background-position: center;
   box-shadow: 2px 4px 9px 0px rgba(166, 141, 174, 0.28);
+
+  /* color: red; */
 `;
 
 export const AddEventBtn = styled.button`
@@ -58,35 +65,14 @@ export const AddEventBtn = styled.button`
 
   box-shadow: 2px 4px 9px 0px rgba(166, 141, 174, 0.28);
 `;
-
-export const Title = styled.h3`
-  opacity: 0;
-  @media screen and (min-width: 768px) {
-    opacity: 1;
-    margin-bottom: 24px;
-    color: #3f3f3f;
-    font-family: Poppins;
-    font-size: 32px;
-    font-weight: 600;
-  }
-  @media screen and (min-width: 768px) {
-  }
-`;
-
+//форматирование списка//
 export const EventList = styled.ul`
-  display: grid;
-
   justify-content: center;
   align-items: center;
   @media screen and (min-width: 768px) {
-    grid-template-columns: repeat(2, 1fr);
-
-    /* gap: 20px; */
-  }
-  @media screen and (min-width: 1280px) {
-    grid-template-columns: repeat(4, 1fr);
-
-    /* gap: 20px; */
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); /* Две колонки */
+    gap: 20px;
   }
 `;
 export const EventItem = styled.li`
@@ -97,6 +83,10 @@ export const EventItem = styled.li`
   background-color: #ffffff;
   margin-bottom: 24px;
   overflow: hidden;
+
+  /* background: url(<path-to-image>), lightgray 50% / cover no-repeat; */
+
+  /* sdw2 */
   box-shadow: 2px 4px 9px 0px rgba(166, 141, 174, 0.28);
 
   @media screen and (min-width: 768px) {
@@ -113,10 +103,6 @@ export const Img = styled.img`
   object-fit: cover;
   border-top-left-radius: 12px;
   border-top-right-radius: 12px;
-
-  ${EventItem}:hover & {
-    height: 300px;
-  }
 `;
 
 export const CategoryPriorityWrap = styled.ul`
@@ -159,6 +145,9 @@ export const DataWrapper = styled.div`
   width: 272px;
   display: flex;
   justify-content: space-between;
+  /* padding: 8px 16px; */
+  /* padding-right: 16px;
+  padding-left: 16px; */
   background-color: rgba(255, 255, 255, 0.8);
 `;
 
@@ -170,48 +159,6 @@ export const DataText = styled.p`
   padding: 8px 16px;
 `;
 
-export const MoreInfoBtn = styled.button`
-  position: absolute;
-  bottom: 10px;
-  right: 16px;
-  padding: 10px 24px;
-  background-color: #7b61ff;
-  color: #fff;
-  border: none;
-  border-radius: 8px;
-  cursor: pointer;
-  opacity: 0;
-  transition: opacity 0.3s, bottom 0.3s;
+export const LocationWrapper = styled.span``;
 
-  ${EventItem}:hover & {
-    opacity: 1;
-    bottom: 10px;
-  }
-`;
-
-export const MoreInfoLink = styled(Link)`
-  text-decoration: none;
-  color: #ffffff;
-  font-size: 14px;
-  font-weight: 500;
-  line-height: 1.42;
-`;
-
-export const DescriptionWrapper = styled.div`
-  padding: 16px;
-`;
-export const TitleEvent = styled.h4`
-  font-size: 16px;
-  font-weight: 500;
-  line-height: 1.5;
-  margin-bottom: 16px;
-`;
-
-export const DescriptionInfo = styled.p`
-  padding-bottom: 16px;
-
-  color: #49454f;
-  font-size: 14px;
-  font-weight: 500;
-  line-height: 1.42;
-`;
+///конец форматирования списка///

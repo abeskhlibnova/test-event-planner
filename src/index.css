@@ -1,26 +1,23 @@
 /* @import-normalize; */
 /* bring in normalize.css styles */
+
+
+@import url('https://fonts.googleapis.com/css2?family=Alata&family=Poppins:wght@300;400;500;600&display=swap');
+
+
 html {
   height: 100%;
 }
 
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  font-family: 'Poppins', "Alata", sans-serif;
   width: 100vw;
   height: 100vh;
 
 
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
-}
 
 li {
   list-style: none;
@@ -36,12 +33,14 @@ h3,
 h4,
 h5,
 p {
-  color: black
+  color: #3F3F3F;
+    margin: 0;
+    padding: 0;
 }
 
 ul,
 ol {
-  margin-top: 0;
-  margin-bottom: 0;
-  padding-left: 0;
+  margin: 0;
+  padding: 0;
 }
+
