@@ -81,7 +81,7 @@ export default function MainPage() {
       case "by priority up":
         setEvents((prevEvents) => {
           return [...prevEvents].sort((a, b) => {
-            const priorityOrder = { high: 1, medium: 2, low: 3 };
+            const priorityOrder = { High: 1, Medium: 2, Low: 3 };
             return priorityOrder[a.priority] - priorityOrder[b.priority];
           });
         });
@@ -89,7 +89,7 @@ export default function MainPage() {
       case "by priority down":
         setEvents((prevEvents) => {
           return [...prevEvents].sort((a, b) => {
-            const priorityOrder = { low: 1, medium: 2, high: 3 };
+            const priorityOrder = { Low: 1, Medium: 2, High: 3 };
             return priorityOrder[a.priority] - priorityOrder[b.priority];
           });
         });
