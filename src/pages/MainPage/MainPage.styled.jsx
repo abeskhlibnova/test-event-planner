@@ -2,6 +2,7 @@ import styled from "styled-components";
 import { Link } from "react-router-dom";
 import filterCategory from "../../images/icons/filter.svg";
 import sortEvent from "../../images/icons/sort.svg";
+import Select from "react-select";
 
 export const MainPageWrapper = styled.div`
   padding: 24px;
@@ -207,4 +208,8 @@ export const DescriptionInfo = styled.p`
   font-size: 14px;
   font-weight: 500;
   line-height: 1.42;
+`;
+
+export const StyledSelect = styled(Select)`
+  width: 100px;
 `;

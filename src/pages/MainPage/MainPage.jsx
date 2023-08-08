@@ -3,6 +3,9 @@ import { Link, useLocation } from "react-router-dom";
 import { db } from "../../../firebase/config";
 import { getDocs, collection, orderBy, query } from "firebase/firestore";
 import photo from "../../images/defaultPhoto.png";
+import { FormControl, MenuItem, Select } from "@mui/material"; // Import standard Material-UI components
+
+import ExpandMoreIcon from "@mui/icons-material/ExpandMore"; // Change to the desired icon
 
 import {
   MainPageWrapper,
@@ -27,11 +30,21 @@ import {
   Title,
 } from "./MainPage.styled";
 
+const optionsSort = [
+  { value: "", label: "Sort by" },
+  { value: "by name up", label: "by name ↑" },
+  { value: "by name down", label: "by name ↓" },
+  { value: "by data up", label: "by data ↑" },
+  { value: "by data down", label: "by data ↓" },
+  { value: "by priority up", label: "by priority ↑" },
+  { value: "by priority down", label: "by priority ↓" },
+];
+
 export default function MainPage() {
   const [events, setEvents] = useState([]);
   const [selectedSort, setSelectedSort] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("");
-  const [filteredEvents, setFilteredEvents] = useState([]);
+  // const [filteredEvents, setFilteredEvents] = useState([]);
 
   const location = useLocation();
 
@@ -98,12 +111,15 @@ export default function MainPage() {
         console.log("no sort");
     }
   };
+  const filteredEvents = selectedCategory
+    ? events.filter((event) => event.category === selectedCategory)
+    : events;
 
   const handleSelectedCategory = (e) => {
     setSelectedCategory(e.target.value);
   };
 
-  const elements = events.map(
+  const elements = filteredEvents.map(
     ({ id, title, description, data, time, locations, category, priority }) => {
       return (
         <EventItem key={id}>
@@ -149,30 +165,38 @@ export default function MainPage() {
   return (
     <MainPageWrapper>
       <div>
-        <select id="sort" value={selectedSort} onChange={handleSelectSort}>
-          <option value="">Sort by</option>
-          <option value="by name up">by name &uarr;</option>
-          <option value="by name down">by name &darr;</option>
-          <option value="by data up">by data &uarr;</option>
-          <option value="by data down">by data &darr;</option>
-          <option value="by priority up">by priority &uarr;</option>
-          <option value="by priority down">by priority &darr;</option>
-        </select>
-        <label htmlFor="category"></label>
-        <select
-          id="category"
-          value={selectedCategory}
-          onChange={handleSelectedCategory}
-        >
-          <option value="">Category</option>
-          <option value="Art">Art</option>
-          <option value="Music">Music</option>
-          <option value="Business">Business</option>
-          <option value="Conference">Conference</option>
-          <option value="Workshop">Workshop</option>
-          <option value="Party">Party</option>
-          <option value="Sport">Sport</option>
-        </select>
+        <FormControl>
+          <Select
+            id="sort"
+            // defaultValue=""
+            value={selectedSort}
+            onChange={handleSelectSort}
+            IconComponent={ExpandMoreIcon}
+          >
+            {optionsSort.map((option) => (
+              <MenuItem key={option.value} value={option.value}>
+                {option.label}
+              </MenuItem>
+            ))}
+          </Select>
+        </FormControl>
+        {/* <label htmlFor="category"></label> */}
+        <FormControl>
+          <Select
+            id="category"
+            value={selectedCategory}
+            onChange={handleSelectedCategory}
+          >
+            <MenuItem value="">Category</MenuItem>
+            <MenuItem value="Art">Art</MenuItem>
+            <MenuItem value="Music">Music</MenuItem>
+            <MenuItem value="Business">Business</MenuItem>
+            <MenuItem value="Conference">Conference</MenuItem>
+            <MenuItem value="Workshop">Workshop</MenuItem>
+            <MenuItem value="Party">Party</MenuItem>
+            <MenuItem value="Sport">Sport</MenuItem>
+          </Select>
+        </FormControl>
       </div>
 
       <AddEventBtn>
