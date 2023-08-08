@@ -2,6 +2,24 @@ import React, { useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { storage, db } from "../../../firebase/config";
 import { collection, addDoc } from "firebase/firestore";
+// import Select, { selectClasses } from "@mui/joy/Select";
+// import Option from "@mui/joy/Option";
+
+import {
+  CreateEventWrapper,
+  FormWrapper,
+  BackBtn,
+  BackLink,
+  TitleInput,
+  Form,
+  InputWrapper,
+  Input,
+  Textarea,
+  Select,
+  Label,
+  Option,
+  SubmitBtn,
+} from "./CreateEvent.styled";
 
 export default function CreateEvent() {
   const [selectedImage, setSelectedImage] = useState(null);
@@ -15,7 +33,7 @@ export default function CreateEvent() {
     priority: "None",
     createAt: "",
   });
-  // const history = useHistory();
+
   const navigate = useNavigate();
 
   const location = useLocation();
@@ -67,101 +85,103 @@ export default function CreateEvent() {
   };
 
   return (
-    <div>
-      <button>
-        <Link to={goBack}>&larr; Back</Link>
-      </button>
-      <h3>Create new event</h3>
-      <form onSubmit={handleSubmit}>
-        <div>
-          <label htmlFor="title">Title:</label>
-          <input
-            type="text"
-            id="title"
-            name="title"
-            value={formData.title}
-            onChange={handleChange}
-            // pattern="/^([A-Za-zА-Яа-яІіЇїЄєҐґ-\s]{2,16})+$/"
-          />
-        </div>
-        <div>
-          <label htmlFor="description">Description:</label>
-          <textarea
-            id="description"
-            name="description"
-            value={formData.description}
-            onChange={handleChange}
-          />
-        </div>
-        <div>
-          <label htmlFor="data">Select Data:</label>
-          <input
-            type="date"
-            id="data"
-            name="data"
-            value={formData.data}
-            onChange={handleChange}
-          />
-        </div>
-        <div>
-          <label htmlFor="time">Select Time:</label>
-          <input
-            type="time"
-            id="time"
-            name="time"
-            value={formData.time}
-            onChange={handleChange}
-          />
-        </div>
-        <div>
-          <label htmlFor="locations">Location:</label>
-          <input
-            type="text"
-            id="locations"
-            name="locations"
-            value={formData.locations}
-            onChange={handleChange}
-          />
-        </div>
-        <div>
-          <label htmlFor="category">Category:</label>
-          <select
-            id="category"
-            name="category"
-            value={formData.category}
-            onChange={handleChange}
-          >
-            <option value=""></option>
-            <option value="Art">Art</option>
-            <option value="Music">Music</option>
-            <option value="Business">Business</option>
-            <option value="Conference">Conference</option>
-            <option value="Workshop">Workshop</option>
-            <option value="Party">Party</option>
-            <option value="Sport">Sport</option>
-          </select>
-        </div>
-        <div>
+    <CreateEventWrapper>
+      <BackBtn>
+        <BackLink to={goBack}>&larr; &nbsp; Back</BackLink>
+      </BackBtn>
+      <TitleInput>Create new event</TitleInput>
+      <FormWrapper>
+        <Form onSubmit={handleSubmit}>
+          <InputWrapper>
+            <Label htmlFor="title">Title</Label>
+            <Input
+              type="text"
+              id="title"
+              name="title"
+              value={formData.title}
+              onChange={handleChange}
+              // pattern="/^([A-Za-zА-Яа-яІіЇїЄєҐґ-\s]{2,16})+$/"
+            />
+          </InputWrapper>
+          <InputWrapper>
+            <Label htmlFor="description">Description</Label>
+            <Textarea
+              id="description"
+              name="description"
+              value={formData.description}
+              onChange={handleChange}
+            />
+          </InputWrapper>
+          <InputWrapper>
+            <Label htmlFor="data">Select Date</Label>
+            <Input
+              type="date"
+              id="data"
+              name="data"
+              value={formData.data}
+              onChange={handleChange}
+              placeholder="Select Date"
+            />
+          </InputWrapper>
+          <InputWrapper>
+            <Label htmlFor="time">Select Time</Label>
+            <Input
+              type="time"
+              id="time"
+              name="time"
+              value={formData.time}
+              onChange={handleChange}
+            />
+          </InputWrapper>
+          <InputWrapper>
+            <Label htmlFor="locations">Location</Label>
+            <Input
+              type="text"
+              id="locations"
+              name="locations"
+              value={formData.locations}
+              onChange={handleChange}
+            />
+          </InputWrapper>
+          <InputWrapper>
+            <Label htmlFor="category">Category</Label>
+            <Select
+              id="category"
+              name="category"
+              value={formData.category}
+              onChange={handleChange}
+            >
+              <Option value=""></Option>
+              <Option value="Art">Art</Option>
+              <Option value="Music">Music</Option>
+              <Option value="Business">Business</Option>
+              <Option value="Conference">Conference</Option>
+              <Option value="Workshop">Workshop</Option>
+              <Option value="Party">Party</Option>
+              <Option value="Sport">Sport</Option>
+            </Select>
+          </InputWrapper>
+          {/* <div>
           <input type="file" />
-        </div>
-        <div>
-          <label htmlFor="priority">Priority:</label>
-          <select
-            id="priority"
-            name="priority"
-            value={formData.priority}
-            onChange={handleChange}
-          >
-            <option value=""></option>
-            <option value="High">high</option>
-            <option value="Medium">medium</option>
-            <option value="Low">low</option>
-          </select>
-        </div>
-        <div>
-          <button type="submit">Create Event</button>
-        </div>
-      </form>
-    </div>
+        </div> */}
+          <InputWrapper>
+            <Label htmlFor="priority">Priority</Label>
+            <Select
+              id="priority"
+              name="priority"
+              value={formData.priority}
+              onChange={handleChange}
+            >
+              <Option value=""></Option>
+              <Option value="High">High</Option>
+              <Option value="Medium">Medium</Option>
+              <Option value="Low">Low</Option>
+            </Select>
+          </InputWrapper>
+
+          <SubmitBtn type="submit">Add event</SubmitBtn>
+        </Form>
+      </FormWrapper>
+    </CreateEventWrapper>
   );
 }
