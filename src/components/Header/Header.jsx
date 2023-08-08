@@ -59,7 +59,6 @@ export default function Header() {
         </Select>
         <Input
           placeholder="Search by keywords"
-          // value={value}
           startDecorator={
             <Search
               sx={{

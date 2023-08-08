@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import { Link, useLocation, useNavigate } from "react-router-dom";
-import { storage, db } from "../../../firebase/config";
+import { useLocation, useNavigate } from "react-router-dom";
+import { db } from "../../../firebase/config";
 import { collection, addDoc } from "firebase/firestore";
 
 import {
@@ -158,9 +158,6 @@ export default function CreateEvent() {
               <Option value="Sport">Sport</Option>
             </Select>
           </InputWrapper>
-          {/* <div>
-          <input type="file" />
-        </div> */}
           <InputWrapper>
             <Label htmlFor="priority">Priority</Label>
             <Select

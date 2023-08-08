@@ -22,6 +22,7 @@ import {
   PriorityHighText,
   PriorityMediumText,
   PriorityLowText,
+  Wrapper,
 } from "./EventInfo.styled";
 import photo from "../../images/defaultPhoto.png";
 
@@ -63,47 +64,51 @@ export default function EventInfo() {
       <BackBtn>
         <BackLink to={goBack}>&larr; &nbsp; Back</BackLink>
       </BackBtn>
-      <TitleEvent>{eventInfo.title}</TitleEvent>
-      <InfoWrapper>
-        <Img src={photo} />
-        <TextWrapper>
-          <Description>{eventInfo.description}</Description>
-          <EventData>
-            <EventDataItem>
-              <TextData>{eventInfo.category}</TextData>
-            </EventDataItem>
-            <EventDataItem>
-              {(eventInfo.priority === "High" && (
-                <PriorityHighText>{eventInfo.priority}</PriorityHighText>
-              )) ||
-                (eventInfo.priority === "Low" && (
-                  <PriorityLowText>{eventInfo.priority}</PriorityLowText>
+      <Wrapper>
+        <TitleEvent>{eventInfo.title}</TitleEvent>
+        <InfoWrapper>
+          <Img src={photo} />
+          <TextWrapper>
+            <Description>{eventInfo.description}</Description>
+            <EventData>
+              <EventDataItem>
+                <TextData>{eventInfo.category}</TextData>
+              </EventDataItem>
+              <EventDataItem>
+                {(eventInfo.priority === "High" && (
+                  <PriorityHighText>{eventInfo.priority}</PriorityHighText>
                 )) ||
-                (eventInfo.priority === "Medium" && (
-                  <PriorityMediumText>{eventInfo.priority}</PriorityMediumText>
-                ))}
-            </EventDataItem>
-            <EventDataItem>
-              <TextData>{eventInfo.locations}</TextData>
-            </EventDataItem>
-            <EventDataItem>
-              <TextData>
-                {eventInfo.data.split("-").slice(1).reverse().join(".")} at
-                &nbsp;
-                {eventInfo.time}
-              </TextData>
-            </EventDataItem>
-          </EventData>
-          <BtnList>
-            <BtnItem>
-              <BtnEdit>Edit</BtnEdit>
-            </BtnItem>
-            <BtnItem>
-              <BtnDelete onClick={deleteEvent}>Delete event</BtnDelete>
-            </BtnItem>
-          </BtnList>
-        </TextWrapper>
-      </InfoWrapper>
+                  (eventInfo.priority === "Low" && (
+                    <PriorityLowText>{eventInfo.priority}</PriorityLowText>
+                  )) ||
+                  (eventInfo.priority === "Medium" && (
+                    <PriorityMediumText>
+                      {eventInfo.priority}
+                    </PriorityMediumText>
+                  ))}
+              </EventDataItem>
+              <EventDataItem>
+                <TextData>{eventInfo.locations}</TextData>
+              </EventDataItem>
+              <EventDataItem>
+                <TextData>
+                  {eventInfo.data.split("-").slice(1).reverse().join(".")} at
+                  &nbsp;
+                  {eventInfo.time}
+                </TextData>
+              </EventDataItem>
+            </EventData>
+            <BtnList>
+              <BtnItem>
+                <BtnEdit>Edit</BtnEdit>
+              </BtnItem>
+              <BtnItem>
+                <BtnDelete onClick={deleteEvent}>Delete event</BtnDelete>
+              </BtnItem>
+            </BtnList>
+          </TextWrapper>
+        </InfoWrapper>
+      </Wrapper>
     </InfoEventWrapper>
   );
 }

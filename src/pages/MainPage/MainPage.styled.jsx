@@ -1,8 +1,5 @@
 import styled from "styled-components";
 import { Link } from "react-router-dom";
-import Select, { selectClasses } from "@mui/joy/Select";
-import Option from "@mui/joy/Option";
-import KeyboardArrowDown from "@mui/icons-material/KeyboardArrowDown";
 import filterCategory from "../../images/icons/filter.svg";
 import sortEvent from "../../images/icons/sort.svg";
 
@@ -80,13 +77,9 @@ export const EventList = styled.ul`
   align-items: center;
   @media screen and (min-width: 768px) {
     grid-template-columns: repeat(2, 1fr);
-
-    /* gap: 20px; */
   }
   @media screen and (min-width: 1280px) {
     grid-template-columns: repeat(4, 1fr);
-
-    /* gap: 20px; */
   }
 `;
 export const EventItem = styled.li`

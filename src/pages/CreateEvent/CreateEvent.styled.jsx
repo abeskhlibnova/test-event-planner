@@ -1,11 +1,6 @@
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 
-// import Select, { selectClasses } from "@mui/joy/Select";
-// import Option from "@mui/joy/Option";
-
-// export const SelectPriority = styled(Select)``;
-
 export const CreateEventWrapper = styled.div`
   padding: 24px;
 `;
@@ -57,15 +52,6 @@ export const Form = styled.form`
     flex-direction: column;
     flex-wrap: wrap;
     gap: 20px 42px;
-    /* grid-template-columns: repeat(2, 1fr);
-    grid-gap: 10px;
-    align-content: start; */
-    /* display: grid; */
-    /* grid-template-columns: repeat(2, 1fr); */
-    /* grid-template-rows: repeat(2, 1fr);  */
-    /* grid-gap: 10px; */
-
-    /* gap: 20px; */
   }
   @media screen and (min-width: 1280px) {
     width: 1280px;
@@ -105,7 +91,6 @@ export const Input = styled.input`
     outline: none;
   }
   @media screen and (min-width: 768px) {
-    /* width: 308px; */
     margin-bottom: 8px;
   }
 `;

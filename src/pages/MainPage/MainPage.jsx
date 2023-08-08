@@ -1,18 +1,13 @@
 import React, { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
-import { storage, db } from "../../../firebase/config";
-
+import { db } from "../../../firebase/config";
 import { getDocs, collection, orderBy, query } from "firebase/firestore";
-
-import { FiFilter } from "react-icons/fi";
 import photo from "../../images/defaultPhoto.png";
+
 import {
   MainPageWrapper,
   EventItem,
-  SortBtn,
-  CategoryBtn,
   AddEventBtn,
-  DropdownContent,
   EventList,
   Img,
   CategoryPriorityWrap,
@@ -31,7 +26,6 @@ import {
   DescriptionInfo,
   Title,
 } from "./MainPage.styled";
-import { Description } from "@mui/icons-material";
 
 export default function MainPage() {
   const [events, setEvents] = useState([]);
@@ -157,8 +151,6 @@ export default function MainPage() {
   return (
     <MainPageWrapper>
       <div>
-        {/* <label htmlFor="sort"></label> */}
-
         <select id="sort" value={selectedSort} onChange={handleSelectSort}>
           <option value="">Sort by</option>
           <option value="by name up">by name &uarr;</option>
@@ -168,7 +160,6 @@ export default function MainPage() {
           <option value="by priority up">by priority &uarr;</option>
           <option value="by priority down">by priority &darr;</option>
         </select>
-
         <label htmlFor="category"></label>
         <select
           id="category"
@@ -176,7 +167,6 @@ export default function MainPage() {
           onChange={handleSelectedCategory}
         >
           <option value="">Category</option>
-          {/* <option value="All">All</option> */}
           <option value="Art">Art</option>
           <option value="Music">Music</option>
           <option value="Business">Business</option>

@@ -19,6 +19,10 @@ export const BackLink = styled(Link)`
   font-weight: 500;
 `;
 
+export const Wrapper = styled.div`
+  margin: 0 auto;
+`;
+
 export const TitleEvent = styled.h3`
   margin-bottom: 24px;
 
@@ -30,15 +34,12 @@ export const TitleEvent = styled.h3`
 
 export const InfoWrapper = styled.div`
   position: relative;
-  /* padding: 0 16px 40px 16px; */
   margin: 0 auto;
-  justify-content: center;
-  align-items: center;
+
   width: 272px;
   height: 480px;
   border-radius: 12px;
   background-color: #ffffff;
-  /* margin-bottom: 24px; */
   overflow: hidden;
   box-shadow: 2px 4px 9px 0px rgba(166, 141, 174, 0.28);
   @media screen and (min-width: 768px) {
@@ -123,7 +124,6 @@ export const BtnItem = styled.li`
 
 export const BtnEdit = styled.button`
   width: 108px;
-
   padding: 8px 16px;
   border: 1px solid #7b61ff;
   background-color: #ffffff;
@@ -138,7 +138,6 @@ export const BtnEdit = styled.button`
 
 export const BtnDelete = styled.button`
   width: 108px;
-  /* margin: 0 auto; */
   padding: 8px 16px;
   border: 1px solid #7b61ff;
   background-color: #7b61ff;
