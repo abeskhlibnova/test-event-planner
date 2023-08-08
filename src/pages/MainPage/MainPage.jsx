@@ -55,8 +55,6 @@ export default function MainPage() {
     }
   };
 
-  console.log("events", events);
-
   const handleSelectSort = (e) => {
     setSelectedSort(e.target.value);
     switch (e.target.value) {
