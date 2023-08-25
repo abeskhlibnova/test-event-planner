@@ -5,16 +5,18 @@ export const InfoEventWrapper = styled.div`
   padding: 24px;
 `;
 
-export const BackBtn = styled.button`
-  border: none;
-  background-color: inherit;
-  margin-bottom: 24px;
-`;
+// export const BackBtn = styled.button`
+
+// `;
 
 export const BackLink = styled(Link)`
+  border: none;
+  background-color: inherit;
+  /* margin-bottom: 34px; */
+  padding: 10px 10px 10px 0;
+  cursor: pointer;
   text-decoration: none;
   color: #7b61ff;
-  font-family: Poppins;
   font-size: 14px;
   font-weight: 500;
 `;
@@ -24,7 +26,9 @@ export const Wrapper = styled.div`
 `;
 
 export const TitleEvent = styled.h3`
+  margin-top: 24px;
   margin-bottom: 24px;
+  /* font-family: "Poppins"; */
 
   @media screen and (min-width: 768px) {
     font-size: 32px;
@@ -70,6 +74,7 @@ export const Description = styled.p`
   font-size: 14px;
   font-weight: 400;
   line-height: 1.42;
+  /* font-family: "Poppins"; */
 `;
 
 export const EventData = styled.ul`
@@ -95,6 +100,7 @@ export const TextData = styled.p`
   font-size: 14px;
   font-weight: 500;
   line-height: 1.42;
+  /* font-family: "Poppins"; */
 `;
 
 export const PriorityHighText = styled(TextData)`

@@ -4,7 +4,6 @@ import { db } from "../../../firebase/config";
 
 import { doc, onSnapshot, deleteDoc } from "firebase/firestore";
 import {
-  BackBtn,
   BackLink,
   TitleEvent,
   InfoWrapper,
@@ -61,13 +60,12 @@ export default function EventInfo() {
 
   return (
     <InfoEventWrapper>
-      <BackBtn>
-        <BackLink to={goBack}>&larr; &nbsp; Back</BackLink>
-      </BackBtn>
+      <BackLink to={goBack}>&larr; &nbsp; Back</BackLink>
+
       <Wrapper>
         <TitleEvent>{eventInfo.title}</TitleEvent>
         <InfoWrapper>
-          <Img src={photo} />
+          <Img src={photo} alt={eventInfo.title} loading="lazy" />
           <TextWrapper>
             <Description>{eventInfo.description}</Description>
             <EventData>

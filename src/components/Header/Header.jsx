@@ -1,5 +1,10 @@
 import React from "react";
-import { HeaderWrapper, Title, WrapperSearchLang } from "./Header.styled";
+import {
+  HeaderWrapper,
+  LogoLink,
+  LogoTitle,
+  WrapperSearchLang,
+} from "./Header.styled";
 import Select, { selectClasses } from "@mui/joy/Select";
 import Option from "@mui/joy/Option";
 import Input from "@mui/joy/Input";
@@ -10,7 +15,9 @@ import Search from "@mui/icons-material/Search";
 export default function Header() {
   return (
     <HeaderWrapper>
-      <Title>Event Planner</Title>
+      <LogoLink aria-current="page" to="/">
+        <LogoTitle>Event Planner</LogoTitle>
+      </LogoLink>
       <WrapperSearchLang>
         <Select
           defaultValue="UK"
@@ -68,7 +75,6 @@ export default function Header() {
           }
           onChange={(event) => setValue(event.target.value)}
           sx={{
-            fontFamily: "Poppins",
             fontWeight: "300",
             border: "none",
             borderRadius: 8,
