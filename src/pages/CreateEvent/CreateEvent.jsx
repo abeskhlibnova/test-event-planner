@@ -6,7 +6,6 @@ import { collection, addDoc } from "firebase/firestore";
 import {
   CreateEventWrapper,
   FormWrapper,
-  BackBtn,
   BackLink,
   TitleInput,
   Form,
@@ -84,9 +83,10 @@ export default function CreateEvent() {
 
   return (
     <CreateEventWrapper>
-      <BackBtn>
-        <BackLink to={goBack}>&larr; &nbsp; Back</BackLink>
-      </BackBtn>
+      <BackLink type="button" to={goBack}>
+        &larr; &nbsp; Back
+      </BackLink>
+
       <TitleInput>Create new event</TitleInput>
       <FormWrapper>
         <Form onSubmit={handleSubmit}>
@@ -166,7 +166,7 @@ export default function CreateEvent() {
               value={formData.priority}
               onChange={handleChange}
             >
-              <Option value=""></Option>
+              <Option value="Choose..."></Option>
               <Option value="High">High</Option>
               <Option value="Medium">Medium</Option>
               <Option value="Low">Low</Option>

@@ -5,22 +5,23 @@ export const CreateEventWrapper = styled.div`
   padding: 24px;
 `;
 
-export const BackBtn = styled.button`
-  border: none;
-  background-color: inherit;
-  margin-bottom: 24px;
-`;
+export const BackBtn = styled.button``;
 
 export const BackLink = styled(Link)`
+  border: none;
+  background-color: inherit;
   text-decoration: none;
   color: #7b61ff;
-  font-family: Poppins;
   font-size: 14px;
   font-weight: 500;
+  cursor: pointer;
 `;
 
-export const TitleInput = styled.h3`
+export const TitleInput = styled.h2`
+  margin-top: 24px;
   margin-bottom: 24px;
+  /* font-family: "Poppins"; */
+
   @media screen and (min-width: 768px) {
     font-size: 32px;
     font-weight: 600;

@@ -17,7 +17,18 @@ body {
 
 
 }
+/* 
+body[lang="en"] {
+  font-family: 'Poppins', sans-serif
+}
 
+body[lang="ru"] {
+  font-family: "Alata", sans-serif;
+}
+
+body[lang="ua"] {
+  font-family: "Alata", sans-serif;
+} */
 
 li {
   list-style: none;

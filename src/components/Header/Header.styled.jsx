@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { Link } from "react-router-dom";
 
 export const HeaderWrapper = styled.header`
   border-bottom: 1px solid #7b61ff;
@@ -12,7 +13,10 @@ export const WrapperSearchLang = styled.div`
   flex-wrap: wrap;
 `;
 
-export const Title = styled.h2`
+export const LogoLink = styled(Link)`
+  cursor: pointer;
+`;
+export const LogoTitle = styled.h1`
   color: #7b61ff;
   font-family: Alata;
   font-size: 24px;
